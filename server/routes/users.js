@@ -50,5 +50,5 @@ router.get('/addUsers',function(req,res,next){
     })
   })
 })
-// http://localhost:3000/users/addUsers?name=&zsj&url=www.4399.com&alexa=9876&country=CN
+
 module.exports = router;
