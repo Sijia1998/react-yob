@@ -37,10 +37,17 @@ router.get('/getUsers', function (req, res, next) {
   })
 })
 
-router.get('/addUsers',function(req,res,next){
-  let param = req.query;
+router.post('/addUsers',function(req,res,next){
+  let param = req.body;
   console.log(param);
-  connection.query(userSQL.addUser,[param.name,param.url,param.alexa,param.country],function(err,result){
+  let paramObj = 
+    [param.userName,
+    param.userAge,
+    param.danceOfchoice,
+    param.phoneNumber,
+    param.classesName]
+  
+  connection.query('INSERT INTO userlists(userName,userAge,danceOfchoice,phoneNumber,classesName) VALUES(?,?,?,?,?)',paramObj,function(err,result){
     if(err){
       return console.log("err:",err.message)
     }

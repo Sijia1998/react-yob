@@ -2,7 +2,7 @@ const dbConfig = {
     host: 'localhost', //主机
     user: 'root', // 数据库用户名
     password: 'zhusijia', //数据库密码
-    database: 'test', //数据库名称
+    database: 'yob', //数据库名称
 }
 
 module.exports = dbConfig;
