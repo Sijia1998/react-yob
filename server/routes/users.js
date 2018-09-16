@@ -47,13 +47,17 @@ router.post('/addUsers',function(req,res,next){
     param.phoneNumber,
     param.classesName]
   
-  connection.query('INSERT INTO userlists(userName,userAge,danceOfchoice,phoneNumber,classesName) VALUES(?,?,?,?,?)',paramObj,function(err,result){
+  connection.query('INSERT INTO userlists(userName,userAge,danceOfchoice,phoneNumber,classesName) values(?,?,?,?,?)',paramObj,function(err,result){
     if(err){
-      return console.log("err:",err.message)
+       console.log("err:",err.message)
+       return res.json({
+         status:'0',
+         msg:'数据添加失败'
+       })
     }
     res.json({
-      code:200,
-      msg:'添加成功',
+      status:'1',
+      msg:'数据添加成功',
     })
   })
 })

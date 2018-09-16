@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import axios from 'axios'
-import { Form, Input, InputNumber, Icon, Select, Radio,Row, Col, Checkbox, Button,message} from 'antd';
-import { type } from 'os';
+import { Form, Input, InputNumber, Select, Radio, Button,message} from 'antd';
+// import { type } from 'os';
 
 
 const FormItem = Form.Item;
@@ -28,10 +28,15 @@ class RegisterForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        message.success('报名成功');
+        
         axios.post('http://localhost:3000/users/addUsers',values)
         .then((res)=>{
           console.log(res)
+          if(res.status === '1'){
+            message.success('报名成功');
+          }else if(res.status === '0'){
+            message.error('提交失败')
+          }
         })
         //提交成功后清空表单数据
         this.props.form.resetFields();
@@ -62,7 +67,7 @@ class RegisterForm extends React.Component {
               required: true, message: '请输入你的姓名!',
             }],
           })(
-            <Input  style={{ width: '50%' }} />
+            <Input  style={{ width: '100%' }} placeholder="例：乔思远"/>
           )}
         </FormItem>
         <FormItem
@@ -75,19 +80,19 @@ class RegisterForm extends React.Component {
               required: true, message: '请输入你的年龄!',
             }],
           })(
-            <InputNumber style={{ width: '18%' }} />
+            <InputNumber style={{ width: '25%' }} />
           )}
         </FormItem>
         <FormItem
           // {...formItemLayout}
-          label="专业班级"
+          label="专业班级" 
         >
-          {getFieldDecorator('classessName', {
+          {getFieldDecorator('classesName', {
             rules: [{
               required: true, message: '请填写你的专业班级!',
             }],
           })(
-            <Input style={{ width: '50%' }} />
+            <Input style={{ width: '100%' }} placeholder="例：电路1604" />
           )}
         </FormItem>
         <FormItem
@@ -97,7 +102,7 @@ class RegisterForm extends React.Component {
           {getFieldDecorator('danceOfchoice', {
             rules: [{ required: true, message: '请选择你意向的舞种!' }],
           })(
-            <Radio.Group  onChange={this.handleFormLayoutChange}>
+            <Radio.Group  defaultValue="Poppin" buttonStyle="solid">
               <Radio.Button value="Poppin">Poppin</Radio.Button>
               <Radio.Button value="Breaking">Breaking</Radio.Button>
               <Radio.Button value="Locking">Locking</Radio.Button>
@@ -112,13 +117,13 @@ class RegisterForm extends React.Component {
           {getFieldDecorator('phoneNumber', {
             rules: [{ required: true, message: '请填写你的联系方式!' }],
           })(
-            <Input style={{ width: '50%' }} />
+            <Input style={{ width: '100%' }} />
           )}
         </FormItem>
-        <FormItem 
+        <FormItem  style={{textAlign:'center'}}
         // {...tailFormItemLayout}
         >
-          <Button type="primary" htmlType="submit">提交</Button>
+          <Button type="primary" htmlType="submit" style={{width:'100%'}}>提交</Button>
         </FormItem>
       </Form>
     );

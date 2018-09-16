@@ -1,37 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import Register from './Mobile/register'
 import './App.css';
-import { width } from 'window-size';
+// import { width } from 'window-size';
 import Particles from 'react-particles-js';
 
-const divStyle = {
-  width:'80%',
-}
+
 const particlesStyle = {
   position:'absolute',
   width: '100%',
+  height:'100%'
 }
 class App extends Component {
   render() {
-    
     return (
       <div className="App">
       <Particles 
+              className="particles"
               params={{
             		particles: {
             			line_linked: {
             				shadow: {
             					enable: true,
-            					color: "#3CA9D1",
-            					blur: 1
+                      color: "#03A9F4",
             				}
-            			}
+                  },
+                  shap:{
+                    type:'star'
+                  }
             		}
             	}}
               style={particlesStyle}
             />
-          <div style={divStyle}
+          <div className="form"
           >
           <Register/>
           </div>
